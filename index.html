@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victor Yumoto | Desenvolvedor Full Stack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero-card">
+        <div class="hero-stars" aria-hidden="true">
+          <span class="star star-1"></span>
+          <span class="star star-2"></span>
+          <span class="star star-3"></span>
+          <span class="star star-4"></span>
+          <span class="star star-5"></span>
+          <span class="star star-6"></span>
+          <span class="star star-7"></span>
+        </div>
+
+        <div class="language-switcher" id="languageSwitcher">
+          <button
+            class="language-toggle"
+            id="languageToggle"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="languageMenu"
+          >
+            PT-BR
+          </button>
+
+          <div class="language-menu" id="languageMenu">
+            <button class="language-option is-active" type="button" data-lang="pt-BR">Português (BR)</button>
+            <button class="language-option" type="button" data-lang="en">English</button>
+            <button class="language-option" type="button" data-lang="es">Español</button>
+            <button class="language-option" type="button" data-lang="ja">日本語</button>
+            <button class="language-option" type="button" data-lang="fr">Français</button>
+            <button class="language-option" type="button" data-lang="de">Deutsch</button>
+            <button class="language-option" type="button" data-lang="it">Italiano</button>
+            <button class="language-option" type="button" data-lang="nl">Nederlands</button>
+            <button class="language-option" type="button" data-lang="ko">한국어</button>
+            <button class="language-option" type="button" data-lang="zh-CN">中文（简体）</button>
+            <button class="language-option" type="button" data-lang="zh-TW">中文（繁體）</button>
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <div class="title-wrap">
+            <h1 id="nameTitle">
+              <span class="name-line" id="nameLine1">VICTOR</span>
+              <span class="name-line" id="nameLine2">YUMOTO</span>
+            </h1>
+          </div>
+          <h2 id="roleText">Desenvolvedor Mobile e Full Stack</h2>
+          <p class="skill-tag" id="stackText">TypeScript</p>
+
+          <a class="cv-button" id="cvButton" href="#" aria-label="Baixar currículo">
+            <span id="cvText">BAIXAR CV</span>
+          </a>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="ship-glow"></div>
+          <svg class="spacecraft" viewBox="0 0 640 420" role="presentation">
+            <defs>
+              <linearGradient id="shipBody" x1="0%" y1="6%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fbfcfe" />
+                <stop offset="52%" stop-color="#d8e1eb" />
+                <stop offset="100%" stop-color="#8a95a4" />
+              </linearGradient>
+              <linearGradient id="shipAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#66efd0" />
+                <stop offset="100%" stop-color="#22af8f" />
+              </linearGradient>
+              <linearGradient id="shipGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#effcff" />
+                <stop offset="100%" stop-color="#67c7dd" />
+              </linearGradient>
+              <linearGradient id="shipShade" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1b2028" stop-opacity="0.05" />
+                <stop offset="100%" stop-color="#0b0e13" stop-opacity="0.22" />
+              </linearGradient>
+              <radialGradient id="shipCore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92" />
+                <stop offset="100%" stop-color="#7ef1d2" stop-opacity="0.12" />
+              </radialGradient>
+            </defs>
+
+            <ellipse
+              class="ship-shadow"
+              cx="338"
+              cy="290"
+              rx="154"
+              ry="15"
+              fill="rgba(67, 224, 183, 0.12)"
+            />
+            <g class="spacecraft-body" transform="translate(82 80) rotate(-10 246 132)">
+              <path
+                class="ship-trail"
+                d="M28 208c34-20 83-25 126-16-28 10-60 31-77 59-20-7-36-19-49-43Z"
+                fill="url(#shipAccent)"
+                opacity="0.22"
+              />
+              <path
+                d="M120 212c54-56 128-98 216-116 92-20 186-8 254 34l40 24-58 11 29 16-74 54c-54 39-126 68-218 82l-142 18 38-54-105-19 20-28Z"
+                fill="url(#shipBody)"
+              />
+              <path
+                d="M175 219c64-58 138-92 234-104l137 27-64 44-31 45-145 44-117 10-34-29Z"
+                fill="url(#shipShade)"
+              />
+              <path
+                d="M288 132c46-25 122-31 191-11l49 18-42 24-212-11Z"
+                fill="url(#shipGlass)"
+              />
+              <path
+                d="M103 206h112l-39 31-124-8Z"
+                fill="url(#shipAccent)"
+                opacity="0.88"
+              />
+              <path
+                d="M295 282 358 201l144-9-98 62-131 31Z"
+                fill="url(#shipAccent)"
+                opacity="0.82"
+              />
+              <path
+                d="M483 139h92l42 17-55 9-77-3Z"
+                fill="#e6edf5"
+              />
+              <path
+                d="M272 150c58 15 133 20 209 18"
+                stroke="rgba(255,255,255,0.38)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0.55"
+              />
+              <path
+                d="M204 245c22-12 54-20 88-20l125-2"
+                stroke="rgba(12,16,22,0.18)"
+                stroke-width="6"
+                stroke-linecap="round"
+              />
+              <path
+                d="M312 182c33 9 78 15 118 13"
+                stroke="rgba(255,255,255,0.4)"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+              <circle cx="484" cy="149" r="8" fill="#ecf7ff" opacity="0.96" />
+              <circle cx="484" cy="149" r="22" fill="url(#shipCore)" />
+              <circle cx="448" cy="168" r="5" fill="#d7fbff" opacity="0.9" />
+            </g>
+          </svg>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
