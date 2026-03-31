@@ -25,20 +25,59 @@ body {
     radial-gradient(circle at 82% 30%, rgba(255, 255, 255, 0.03), transparent 18%),
     linear-gradient(180deg, var(--page-glow) 0%, var(--page-bg) 100%);
   color: var(--text-main);
+  overflow: hidden;
+}
+
+body.view-hero .voyager {
+  top: 50%;
+  right: 3.5%;
+  left: auto;
+  width: min(42vw, 660px);
+  transform: translateY(-50%) rotate(-2deg);
+  animation: voyager-home-drift 7.2s ease-in-out infinite;
+}
+
+body.view-scene .voyager {
+  top: 12%;
+  left: 56%;
+  right: auto;
+  width: min(24vw, 330px);
+  transform: translate3d(0, 0, 0) rotate(-14deg);
+  animation: voyager-scene-flight 6.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .page-shell {
   min-height: 100vh;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  touch-action: pan-x;
+  cursor: grab;
+}
+
+.page-shell::-webkit-scrollbar {
+  height: 0;
+}
+
+.page-shell.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
 }
 
 .hero-card {
   position: relative;
   min-height: 100vh;
+  min-width: 100vw;
+  flex: 0 0 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   background: transparent;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .hero-card::before {
@@ -204,21 +243,71 @@ body {
   padding: 0 36px;
 }
 
-.hero-visual {
-  position: absolute;
-  top: 54%;
-  right: 3.5%;
-  z-index: 1;
-  width: min(42vw, 660px);
+.voyager {
+  position: fixed;
+  z-index: 5;
   aspect-ratio: 640 / 420;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transform: translateY(-50%);
+  transition:
+    top 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    right 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    left 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.ship-glow {
+.ship-bubble {
+  position: absolute;
+  top: -30%;
+  left: 10%;
+  display: grid;
+  gap: 6px;
+  width: min(280px, 78%);
+  padding: 18px 20px;
+  border: 1px solid rgba(67, 224, 183, 0.52);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(17, 25, 33, 0.98) 0%, rgba(10, 15, 21, 0.96) 100%);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.36),
+    0 0 34px rgba(67, 224, 183, 0.16);
+  color: var(--text-main);
+  z-index: 4;
+  animation: bubble-float 5.8s ease-in-out infinite;
+  transition: opacity 320ms ease, transform 420ms ease;
+}
+
+.ship-bubble::after {
+  content: "";
+  position: absolute;
+  left: 34px;
+  bottom: -10px;
+  width: 22px;
+  height: 22px;
+  border-right: 1px solid rgba(67, 224, 183, 0.28);
+  border-bottom: 1px solid rgba(67, 224, 183, 0.28);
+  background: rgba(12, 18, 24, 0.98);
+  transform: rotate(45deg);
+}
+
+.ship-bubble strong {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.ship-bubble span {
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(67, 224, 183, 0.92);
+}
+
+.voyager-glow {
   position: absolute;
   inset: 22% 4% 12% 12%;
   background:
@@ -226,6 +315,228 @@ body {
     radial-gradient(circle at 42% 56%, rgba(126, 232, 255, 0.13) 0%, transparent 40%);
   filter: blur(34px);
   animation: ship-glow-pulse 6.5s ease-in-out infinite;
+}
+
+body.view-scene .ship-bubble {
+  opacity: 0;
+  transform: translate3d(30px, -18px, 0) scale(0.92);
+}
+
+.scene-card {
+  position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
+  flex: 0 0 100vw;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.75fr) minmax(420px, 1fr);
+  align-items: center;
+  padding: 0 6vw;
+  background:
+    radial-gradient(circle at 22% 20%, rgba(67, 224, 183, 0.08), transparent 24%),
+    radial-gradient(circle at 78% 72%, rgba(255, 171, 92, 0.12), transparent 24%),
+    linear-gradient(180deg, #070a10 0%, #090d14 100%);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.scene-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent 54%),
+    radial-gradient(circle at 70% 64%, rgba(255, 196, 124, 0.08), transparent 22%);
+  pointer-events: none;
+}
+
+.scene-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+}
+
+.scene-star-1 {
+  top: 16%;
+  left: 18%;
+}
+
+.scene-star-2 {
+  top: 24%;
+  right: 22%;
+}
+
+.scene-star-3 {
+  top: 66%;
+  left: 36%;
+}
+
+.scene-star-4 {
+  top: 72%;
+  right: 18%;
+}
+
+.scene-star-5 {
+  top: 36%;
+  right: 44%;
+}
+
+.scene-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+}
+
+.scene-kicker {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(67, 224, 183, 0.82);
+}
+
+.scene-title {
+  margin: 0 0 20px;
+  max-width: 10ch;
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  line-height: 0.94;
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  color: #f7f7f4;
+}
+
+.scene-description {
+  margin: 0;
+  max-width: 28ch;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(244, 244, 242, 0.76);
+}
+
+.scene-visual {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.orbit-ring {
+  position: absolute;
+  border: 1px solid rgba(255, 198, 130, 0.18);
+  border-radius: 50%;
+}
+
+.orbit-ring-1 {
+  right: 4%;
+  bottom: 18%;
+  width: min(34vw, 520px);
+  height: min(18vw, 260px);
+  transform: rotate(-16deg);
+}
+
+.orbit-ring-2 {
+  right: 10%;
+  bottom: 14%;
+  width: min(24vw, 360px);
+  height: min(12vw, 190px);
+  transform: rotate(-16deg);
+}
+
+.jupiter-wrap {
+  position: absolute;
+  right: -2%;
+  bottom: 8%;
+  width: min(34vw, 520px);
+  aspect-ratio: 1;
+}
+
+.jupiter-glow {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 177, 102, 0.26) 0%, rgba(255, 177, 102, 0.08) 42%, transparent 72%);
+  filter: blur(30px);
+}
+
+.jupiter {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 32%, rgba(255, 246, 220, 0.46), transparent 28%),
+    linear-gradient(180deg, #c88d58 0%, #e2b27b 22%, #a96e4a 48%, #d6a26e 72%, #8d5638 100%);
+  box-shadow:
+    inset -34px -28px 56px rgba(72, 28, 8, 0.3),
+    inset 18px 22px 30px rgba(255, 245, 222, 0.12),
+    0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+.jupiter-band {
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  border-radius: 999px;
+  opacity: 0.88;
+}
+
+.jupiter-band-1 {
+  top: 18%;
+  height: 14%;
+  background: rgba(255, 225, 184, 0.42);
+  transform: rotate(-6deg);
+}
+
+.jupiter-band-2 {
+  top: 38%;
+  height: 12%;
+  background: rgba(153, 89, 51, 0.42);
+  transform: rotate(5deg);
+}
+
+.jupiter-band-3 {
+  top: 56%;
+  height: 10%;
+  background: rgba(245, 201, 145, 0.32);
+  transform: rotate(-4deg);
+}
+
+.jupiter-band-4 {
+  top: 74%;
+  height: 13%;
+  background: rgba(122, 66, 42, 0.38);
+  transform: rotate(6deg);
+}
+
+.jupiter-spot {
+  position: absolute;
+  right: 18%;
+  top: 56%;
+  width: 18%;
+  height: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 50%, #d78e62 0%, #a95935 100%);
+  box-shadow: inset 0 0 16px rgba(95, 32, 12, 0.18);
+}
+
+.landing-shadow {
+  position: absolute;
+  left: 10%;
+  right: 24%;
+  bottom: 4%;
+  height: 8%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  filter: blur(14px);
 }
 
 .spacecraft {
@@ -391,9 +702,41 @@ h2 {
     padding: 0 28px;
   }
 
-  .hero-visual {
+  body.view-hero .voyager {
     right: 1%;
     width: min(38vw, 420px);
+  }
+
+  body.view-scene .voyager {
+    top: 10%;
+    left: 58%;
+    width: min(30vw, 250px);
+  }
+
+  .scene-card {
+    grid-template-columns: 1fr;
+    padding: 80px 32px 40px;
+  }
+
+  .scene-copy {
+    max-width: 420px;
+  }
+
+  .scene-visual {
+    min-height: 56vh;
+  }
+
+  .jupiter-wrap {
+    right: 2%;
+    bottom: 2%;
+    width: min(46vw, 360px);
+  }
+
+  .ship-bubble {
+    top: -24%;
+    left: 4%;
+    width: min(240px, 84%);
+    padding: 16px 18px;
   }
 }
 
@@ -424,14 +767,78 @@ h2 {
     padding: 0 20px;
   }
 
-  .hero-visual {
-    position: absolute;
+  body.view-hero .voyager {
+    top: 60%;
     right: -12%;
-    bottom: 4%;
     width: 250px;
-    aspect-ratio: 640 / 420;
-    opacity: 0.28;
-    transform: none;
+    transform: translateY(-50%) rotate(-2deg);
+    opacity: 0.34;
+  }
+
+  body.view-scene .voyager {
+    top: 6%;
+    left: 6%;
+    width: 180px;
+    opacity: 1;
+  }
+
+  .page-shell {
+    scroll-snap-type: x proximity;
+  }
+
+  .scene-card {
+    padding: 88px 20px 28px;
+  }
+
+  .scene-title {
+    max-width: 9ch;
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .scene-description {
+    max-width: 30ch;
+    font-size: 0.95rem;
+  }
+
+  .scene-visual {
+    min-height: 52vh;
+  }
+
+  .jupiter-wrap {
+    right: -14%;
+    bottom: -2%;
+    width: 280px;
+  }
+
+  .orbit-ring-1 {
+    right: -2%;
+    bottom: 12%;
+    width: 260px;
+    height: 140px;
+  }
+
+  .orbit-ring-2 {
+    right: 6%;
+    bottom: 9%;
+    width: 180px;
+    height: 96px;
+  }
+
+  .ship-bubble {
+    top: -40%;
+    left: -8%;
+    width: 200px;
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+
+  .ship-bubble strong {
+    font-size: 0.88rem;
+  }
+
+  .ship-bubble span {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
   }
 
   h1 {
@@ -521,6 +928,46 @@ h2 {
   70% {
     opacity: 0.24;
     transform: scaleX(0.9) scaleY(0.94);
+  }
+}
+
+@keyframes bubble-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes voyager-home-drift {
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 10px)) translateX(-10px) rotate(1deg);
+  }
+}
+
+@keyframes voyager-scene-flight {
+  0% {
+    transform: translate3d(-30vw, -14vh, 0) scale(1.1) rotate(-20deg);
+  }
+
+  45% {
+    transform: translate3d(-12vw, 2vh, 0) scale(1) rotate(-10deg);
+  }
+
+  72% {
+    transform: translate3d(-2vw, 16vh, 0) scale(0.96) rotate(-2deg);
+  }
+
+  100% {
+    transform: translate3d(-1vw, 22vh, 0) scale(0.92) rotate(8deg);
   }
 }
 

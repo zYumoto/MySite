@@ -102,6 +102,8 @@ const translations = {
 
 const roleText = document.getElementById("roleText");
 const stackText = document.getElementById("stackText");
+const pageShell = document.querySelector(".page-shell");
+const heroCard = document.querySelector(".hero-card");
 const nameTitle = document.getElementById("nameTitle");
 const nameLine1 = document.getElementById("nameLine1");
 const nameLine2 = document.getElementById("nameLine2");
@@ -109,6 +111,7 @@ const languageSwitcher = document.getElementById("languageSwitcher");
 const languageToggle = document.getElementById("languageToggle");
 const languageMenu = document.getElementById("languageMenu");
 const languageOptions = Array.from(document.querySelectorAll(".language-option"));
+const sceneCard = document.querySelector(".scene-card");
 const nameStates = {
   latin: ["VICTOR", "YUMOTO"],
   japanese: ["ビクター", "湯本"],
@@ -217,6 +220,100 @@ function startNameLoop() {
   }, NAME_SWAP_INTERVAL);
 }
 
+function setActiveView(view) {
+  document.body.classList.remove("view-hero", "view-scene");
+  document.body.classList.add(view);
+}
+
+function startVoyagerRoute() {
+  if (!heroCard || !sceneCard || !("IntersectionObserver" in window)) {
+    setActiveView("view-hero");
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.55) {
+          return;
+        }
+
+        if (entry.target === heroCard) {
+          setActiveView("view-hero");
+        }
+
+        if (entry.target === sceneCard) {
+          setActiveView("view-scene");
+        }
+      });
+    },
+    {
+      threshold: [0.55],
+    }
+  );
+
+  observer.observe(heroCard);
+  observer.observe(sceneCard);
+}
+
+function enableDirectionalScroll() {
+  if (!pageShell) {
+    return;
+  }
+
+  pageShell.addEventListener(
+    "wheel",
+    (event) => {
+      const mostlyVerticalScroll = Math.abs(event.deltaY) >= Math.abs(event.deltaX);
+
+      if (!mostlyVerticalScroll) {
+        return;
+      }
+
+      event.preventDefault();
+      pageShell.scrollBy({
+        left: event.deltaY,
+        behavior: "smooth",
+      });
+    },
+    { passive: false }
+  );
+}
+
+function enableMouseDragScroll() {
+  if (!pageShell) {
+    return;
+  }
+
+  let isDragging = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  pageShell.addEventListener("mousedown", (event) => {
+    isDragging = true;
+    startX = event.clientX;
+    startScrollLeft = pageShell.scrollLeft;
+    pageShell.classList.add("is-dragging");
+  });
+
+  pageShell.addEventListener("mousemove", (event) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const walkX = event.clientX - startX;
+    pageShell.scrollLeft = startScrollLeft - walkX;
+  });
+
+  const stopDragging = () => {
+    isDragging = false;
+    pageShell.classList.remove("is-dragging");
+  };
+
+  pageShell.addEventListener("mouseup", stopDragging);
+  pageShell.addEventListener("mouseleave", stopDragging);
+}
+
 function typeStackEffect() {
   const currentTech = techs[techIndex];
 
@@ -281,8 +378,12 @@ document.addEventListener("keydown", (event) => {
 
 const savedLanguage = window.localStorage.getItem("preferred-language");
 applyLanguage(savedLanguage || "pt-BR");
+setActiveView("view-hero");
 stackText.style.minWidth = `${longestTechLength}ch`;
 stackText.textContent = techs[0];
 charIndex = techs[0].length;
 startNameLoop();
 typeStackEffect();
+startVoyagerRoute();
+enableDirectionalScroll();
+enableMouseDragScroll();
