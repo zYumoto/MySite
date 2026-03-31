@@ -347,6 +347,8 @@ h2 {
 
 .skill-tag {
   margin: 0 0 38px;
+  display: inline-block;
+  min-height: 1em;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1;
   font-weight: 700;
