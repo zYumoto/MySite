@@ -1,11 +1,9 @@
-const translations = {
+﻿const translations = {
   "pt-BR": {
     htmlLang: "pt-BR",
     pageTitle: "Victor Yumoto | Desenvolvedor Full Stack",
     role: "Desenvolvedor FullStack & Automação",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "BAIXAR CV",
-    cvAria: "Baixar curriculo",
     toggle: "PT-BR",
   },
   en: {
@@ -13,8 +11,6 @@ const translations = {
     pageTitle: "Victor Yumoto | Full Stack Developer",
     role: "Full Stack Developer & Automation",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "DOWNLOAD RESUME",
-    cvAria: "Download resume",
     toggle: "EN",
   },
   es: {
@@ -22,17 +18,13 @@ const translations = {
     pageTitle: "Victor Yumoto | Desarrollador Full Stack",
     role: "Desarrollador Full Stack y Automatización",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "DESCARGAR CV",
-    cvAria: "Descargar CV",
     toggle: "ES",
   },
   ja: {
     htmlLang: "ja",
     pageTitle: "Victor Yumoto | Full Stack Developer",
-    role: "モバイルおよびフルスタック開発者",
+    role: "フルスタック・自動化エンジニア",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "履歴書をダウンロード",
-    cvAria: "履歴書をダウンロード",
     toggle: "JA",
   },
   fr: {
@@ -40,8 +32,6 @@ const translations = {
     pageTitle: "Victor Yumoto | Developpeur Full Stack",
     role: "Developpeur Full Stack et Automatisation",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "TELECHARGER LE CV",
-    cvAria: "Telecharger le CV",
     toggle: "FR",
   },
   de: {
@@ -49,8 +39,6 @@ const translations = {
     pageTitle: "Victor Yumoto | Full Stack Entwickler",
     role: "Full Stack Entwickler & Automatisierung",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "LEBENSLAUF LADEN",
-    cvAria: "Lebenslauf herunterladen",
     toggle: "DE",
   },
   it: {
@@ -58,8 +46,6 @@ const translations = {
     pageTitle: "Victor Yumoto | Sviluppatore Full Stack",
     role: "Sviluppatore Full Stack e Automazione",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "SCARICA CV",
-    cvAria: "Scarica il CV",
     toggle: "IT",
   },
   nl: {
@@ -67,51 +53,52 @@ const translations = {
     pageTitle: "Victor Yumoto | Full Stack Ontwikkelaar",
     role: "Full Stack Ontwikkelaar & Automatisering",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "CV DOWNLOADEN",
-    cvAria: "CV downloaden",
     toggle: "NL",
   },
   ko: {
     htmlLang: "ko",
     pageTitle: "Victor Yumoto | Full Stack Developer",
-    role: "모바일 및 풀스택 개발자",
+    role: "풀스택 및 자동화 개발자",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "이력서 다운로드",
-    cvAria: "이력서 다운로드",
     toggle: "KO",
   },
   "zh-CN": {
     htmlLang: "zh-CN",
     pageTitle: "Victor Yumoto | Full Stack Developer",
-    role: "移动端与全栈开发者",
+    role: "全栈与自动化开发者",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "下载简历",
-    cvAria: "下载简历",
     toggle: "ZH-CN",
   },
   "zh-TW": {
     htmlLang: "zh-TW",
     pageTitle: "Victor Yumoto | Full Stack Developer",
-    role: "行動與全端開發者",
+    role: "全端與自動化開發者",
     stack: "JavaScript • TypeScript • React • Node.js • Python",
-    cv: "下載履歷",
-    cvAria: "下載履歷",
     toggle: "ZH-TW",
   },
 };
 
 const roleText = document.getElementById("roleText");
 const stackText = document.getElementById("stackText");
-const pageShell = document.querySelector(".page-shell");
-const heroCard = document.querySelector(".hero-card");
 const nameTitle = document.getElementById("nameTitle");
 const nameLine1 = document.getElementById("nameLine1");
 const nameLine2 = document.getElementById("nameLine2");
+const projectsLine = document.getElementById("projectsLine");
+const experienceLine = document.getElementById("experienceLine");
+const projectModal = document.getElementById("projectModal");
+const projectModalClose = document.getElementById("projectModalClose");
+const projectModalKicker = document.getElementById("projectModalKicker");
+const projectModalTitle = document.getElementById("projectModalTitle");
+const projectModalStack = document.getElementById("projectModalStack");
+const projectModalDescription = document.getElementById("projectModalDescription");
+const projectTriggers = Array.from(document.querySelectorAll("[data-project-trigger]"));
+const projectCloseElements = Array.from(document.querySelectorAll("[data-project-close]"));
+const pageShell = document.querySelector(".page-shell");
+const pageSections = Array.from(document.querySelectorAll(".hero-card, .projects-section, .experience-section"));
 const languageSwitcher = document.getElementById("languageSwitcher");
 const languageToggle = document.getElementById("languageToggle");
 const languageMenu = document.getElementById("languageMenu");
 const languageOptions = Array.from(document.querySelectorAll(".language-option"));
-const sceneCard = document.querySelector(".scene-card");
 const nameStates = {
   latin: ["VICTOR", "YUMOTO"],
   japanese: ["ビクター", "湯本"],
@@ -139,11 +126,29 @@ const longestTechLength = techs.reduce(
   (maxLength, tech) => Math.max(maxLength, tech.length),
   0
 );
+const projectsData = {
+  "deck-forge": {
+    kicker: "Projeto Pessoal",
+    title: "Deck Forge",
+    stack: ["React", "Node.js", "MongoDB"],
+    description:
+      "Desenvolvi o Mtg-Commander, uma aplicação focada no gerenciamento e análise de decks do formato Commander de Magic: The Gathering. O projeto permite organizar cartas, visualizar dados estratégicos e integrar informações externas, proporcionando uma experiência mais eficiente para jogadores e entusiastas do jogo.",
+  },
+  "santiago-page": {
+    kicker: "Cliente Santiago Locacao",
+    title: "Santiago Locacao Page",
+    stack: ["React", "CSS / Tailwind", "JavaScript"],
+    description:
+      "Pagina Oficial Santiago Locacao Page. Landing page moderna desenvolvida para apresentacao de servicos e logistica, com foco em design responsivo e experiencia visual.",
+  },
+};
 
 let nameAnimationRunning = false;
 let techIndex = 0;
 let charIndex = 0;
 let isDeletingTech = false;
+let projectsAnimated = false;
+let experienceAnimated = false;
 
 function applyLanguage(languageCode) {
   const selected = translations[languageCode] || translations["pt-BR"];
@@ -220,100 +225,6 @@ function startNameLoop() {
   }, NAME_SWAP_INTERVAL);
 }
 
-function setActiveView(view) {
-  document.body.classList.remove("view-hero", "view-scene");
-  document.body.classList.add(view);
-}
-
-function startVoyagerRoute() {
-  if (!heroCard || !sceneCard || !("IntersectionObserver" in window)) {
-    setActiveView("view-hero");
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting || entry.intersectionRatio < 0.55) {
-          return;
-        }
-
-        if (entry.target === heroCard) {
-          setActiveView("view-hero");
-        }
-
-        if (entry.target === sceneCard) {
-          setActiveView("view-scene");
-        }
-      });
-    },
-    {
-      threshold: [0.55],
-    }
-  );
-
-  observer.observe(heroCard);
-  observer.observe(sceneCard);
-}
-
-function enableDirectionalScroll() {
-  if (!pageShell) {
-    return;
-  }
-
-  pageShell.addEventListener(
-    "wheel",
-    (event) => {
-      const mostlyVerticalScroll = Math.abs(event.deltaY) >= Math.abs(event.deltaX);
-
-      if (!mostlyVerticalScroll) {
-        return;
-      }
-
-      event.preventDefault();
-      pageShell.scrollBy({
-        left: event.deltaY,
-        behavior: "smooth",
-      });
-    },
-    { passive: false }
-  );
-}
-
-function enableMouseDragScroll() {
-  if (!pageShell) {
-    return;
-  }
-
-  let isDragging = false;
-  let startX = 0;
-  let startScrollLeft = 0;
-
-  pageShell.addEventListener("mousedown", (event) => {
-    isDragging = true;
-    startX = event.clientX;
-    startScrollLeft = pageShell.scrollLeft;
-    pageShell.classList.add("is-dragging");
-  });
-
-  pageShell.addEventListener("mousemove", (event) => {
-    if (!isDragging) {
-      return;
-    }
-
-    const walkX = event.clientX - startX;
-    pageShell.scrollLeft = startScrollLeft - walkX;
-  });
-
-  const stopDragging = () => {
-    isDragging = false;
-    pageShell.classList.remove("is-dragging");
-  };
-
-  pageShell.addEventListener("mouseup", stopDragging);
-  pageShell.addEventListener("mouseleave", stopDragging);
-}
-
 function typeStackEffect() {
   const currentTech = techs[techIndex];
 
@@ -346,6 +257,138 @@ function typeStackEffect() {
   );
 }
 
+async function startProjectsTitle() {
+  if (!projectsLine || projectsAnimated) {
+    return;
+  }
+
+  projectsAnimated = true;
+  await typeText(projectsLine, "PROJETOS");
+  projectsLine.classList.add("is-revealed");
+}
+
+async function startExperienceTitle() {
+  if (!experienceLine || experienceAnimated) {
+    return;
+  }
+
+  experienceAnimated = true;
+  await typeText(experienceLine, "EXPERIÊNCIA");
+  experienceLine.classList.add("is-revealed");
+}
+
+function watchProjectsTitle() {
+  if (!projectsLine) {
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        startProjectsTitle();
+        observer.disconnect();
+      });
+    },
+    {
+      threshold: 0.45,
+    }
+  );
+
+  observer.observe(projectsLine);
+}
+
+function watchExperienceTitle() {
+  if (!experienceLine) {
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        startExperienceTitle();
+        observer.disconnect();
+      });
+    },
+    {
+      threshold: 0.45,
+    }
+  );
+
+  observer.observe(experienceLine);
+}
+
+function watchSectionTransitions() {
+  if (!pageSections.length) {
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    pageSections.forEach((section) => {
+      section.classList.add("is-visible");
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio >= 0.35) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    },
+    {
+      root: pageShell,
+      threshold: [0.35, 0.6],
+    }
+  );
+
+  pageSections.forEach((section) => {
+    observer.observe(section);
+  });
+}
+
+function openProjectModal(projectId) {
+  if (!projectModal) {
+    return;
+  }
+
+  const project = projectsData[projectId];
+
+  if (!project) {
+    return;
+  }
+
+  projectModalKicker.textContent = project.kicker;
+  projectModalTitle.textContent = project.title;
+  projectModalDescription.textContent = project.description;
+  projectModalStack.innerHTML = project.stack
+    .map((item) => `<span class="stack-pill">${item}</span>`)
+    .join("");
+
+  projectModal.classList.add("is-open");
+  projectModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("is-modal-open");
+}
+
+function closeProjectModal() {
+  if (!projectModal) {
+    return;
+  }
+
+  projectModal.classList.remove("is-open");
+  projectModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("is-modal-open");
+}
+
 languageToggle.addEventListener("click", () => {
   const isExpanded = languageToggle.getAttribute("aria-expanded") === "true";
 
@@ -364,6 +407,20 @@ languageOptions.forEach((option) => {
   });
 });
 
+projectTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    openProjectModal(trigger.dataset.projectTrigger);
+  });
+});
+
+projectCloseElements.forEach((element) => {
+  element.addEventListener("click", closeProjectModal);
+});
+
+if (projectModalClose) {
+  projectModalClose.addEventListener("click", closeProjectModal);
+}
+
 document.addEventListener("click", (event) => {
   if (!event.target.closest(".language-switcher")) {
     closeMenu();
@@ -373,17 +430,17 @@ document.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMenu();
+    closeProjectModal();
   }
 });
 
 const savedLanguage = window.localStorage.getItem("preferred-language");
 applyLanguage(savedLanguage || "pt-BR");
-setActiveView("view-hero");
 stackText.style.minWidth = `${longestTechLength}ch`;
 stackText.textContent = techs[0];
 charIndex = techs[0].length;
 startNameLoop();
 typeStackEffect();
-startVoyagerRoute();
-enableDirectionalScroll();
-enableMouseDragScroll();
+watchProjectsTitle();
+watchExperienceTitle();
+watchSectionTransitions();
