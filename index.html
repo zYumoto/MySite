@@ -10,11 +10,56 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <header class="section-header" id="sectionHeader" aria-hidden="true">
+      <div class="section-header-inner">
+        <span class="section-header-kicker">Navegação</span>
+        <nav class="section-header-nav" aria-label="Abas da página">
+          <a class="section-header-link" href="#home" data-section-link="home">Home</a>
+          <a class="section-header-link" href="#about" data-section-link="about">Sobre</a>
+          <a class="section-header-link" href="#projects" data-section-link="projects">Projetos</a>
+          <a class="section-header-link" href="#experience" data-section-link="experience">Experiência</a>
+          <a class="section-header-link" href="#education" data-section-link="education">Formação</a>
+          <a class="section-header-link" href="#technologies" data-section-link="technologies">Tecnologias</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="language-switcher" id="languageSwitcher">
+      <button
+        class="language-toggle"
+        id="languageToggle"
+        type="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="languageMenu"
+      >
+        PT-BR
+      </button>
+
+      <div class="language-menu" id="languageMenu">
+        <button class="language-option is-active" type="button" data-lang="pt-BR">Português (BR)</button>
+        <button class="language-option" type="button" data-lang="en">English</button>
+      </div>
+    </div>
+
+    <nav class="section-dots" aria-label="Navegação entre seções">
+      <a class="section-dot is-active" href="#home" data-section-dot="home" aria-label="Ir para a homepage"></a>
+      <a class="section-dot" href="#about" data-section-dot="about" aria-label="Ir para sobre mim"></a>
+      <a class="section-dot" href="#projects" data-section-dot="projects" aria-label="Ir para projetos"></a>
+      <a class="section-dot" href="#experience" data-section-dot="experience" aria-label="Ir para experiência"></a>
+      <a class="section-dot" href="#education" data-section-dot="education" aria-label="Ir para formação"></a>
+      <a class="section-dot" href="#technologies" data-section-dot="technologies" aria-label="Ir para tecnologias"></a>
+    </nav>
+
     <main class="page-shell">
-      <section class="hero-card">
+      <section class="hero-card" id="home" data-section-name="Homepage">
         <div class="hero-stars" aria-hidden="true">
           <span class="star star-1"></span>
           <span class="star star-2"></span>
@@ -28,33 +73,6 @@
           <span class="star star-10"></span>
           <span class="star star-11"></span>
           <span class="star star-12"></span>
-        </div>
-
-        <div class="language-switcher" id="languageSwitcher">
-          <button
-            class="language-toggle"
-            id="languageToggle"
-            type="button"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="languageMenu"
-          >
-            PT-BR
-          </button>
-
-          <div class="language-menu" id="languageMenu">
-            <button class="language-option is-active" type="button" data-lang="pt-BR">Português (BR)</button>
-            <button class="language-option" type="button" data-lang="en">English</button>
-            <button class="language-option" type="button" data-lang="es">Español</button>
-            <button class="language-option" type="button" data-lang="ja">日本語</button>
-            <button class="language-option" type="button" data-lang="fr">Français</button>
-            <button class="language-option" type="button" data-lang="de">Deutsch</button>
-            <button class="language-option" type="button" data-lang="it">Italiano</button>
-            <button class="language-option" type="button" data-lang="nl">Nederlands</button>
-            <button class="language-option" type="button" data-lang="ko">한국어</button>
-            <button class="language-option" type="button" data-lang="zh-CN">中文（简体）</button>
-            <button class="language-option" type="button" data-lang="zh-TW">中文（繁體）</button>
-          </div>
         </div>
 
         <div class="hero-content">
@@ -119,12 +137,44 @@
         </div>
 
         <a class="hero-scroll-indicator" href="#projects" aria-label="Ir para a seção de projetos">
-          <span class="hero-scroll-text">Projetos abaixo</span>
+          <span class="hero-scroll-text" id="heroScrollText">Projetos abaixo</span>
           <span class="hero-scroll-arrow"></span>
         </a>
       </section>
 
-      <section class="projects-section" id="projects">
+      <section class="about-section" id="about" data-section-name="Sobre mim">
+        <div class="about-stars" aria-hidden="true">
+          <span class="about-star about-star-1"></span>
+          <span class="about-star about-star-2"></span>
+          <span class="about-star about-star-3"></span>
+          <span class="about-star about-star-4"></span>
+        </div>
+
+        <div class="about-copy">
+          <h2 class="about-heading">
+            <span class="about-kana" id="aboutKana">ワタシ</span>
+            <span class="about-line" id="aboutLine">SOBRE MIM</span>
+          </h2>
+          <div class="about-panel">
+            <p class="about-lead" id="aboutLead">
+              Sou estudante de Sistemas de Informação com foco em automação de processos, análise de dados e
+              eficiência operacional. Atualmente atuo na MSC, onde desenvolvo soluções que otimizam fluxos de trabalho
+              e melhoram a visibilidade de dados, utilizando ferramentas como Power BI, Excel (VBA) e Power Automate.
+            </p>
+            <p class="about-text" id="aboutTextOne">
+              Tenho experiência na criação de automações e dashboards que reduzem atividades manuais e apoiam a tomada
+              de decisão. Ao longo da minha trajetória, também atuei com suporte técnico, manutenção de sistemas e
+              organização de dados, o que fortaleceu minha visão prática e orientada a resultados.
+            </p>
+            <p class="about-text" id="aboutTextTwo">
+              Busco constantemente evoluir minhas habilidades em tecnologia, desenvolvimento e integração de sistemas,
+              com o objetivo de criar soluções inteligentes que gerem impacto real no negócio.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects-section" id="projects" data-section-name="Projetos">
         <div class="projects-stars" aria-hidden="true">
           <span class="project-star project-star-1"></span>
           <span class="project-star project-star-2"></span>
@@ -134,10 +184,10 @@
 
         <div class="projects-copy">
           <h2 class="projects-heading">
-            <span class="projects-kana">プロジェクト</span>
+            <span class="projects-kana" id="projectsKana">プロジェクト</span>
             <span class="projects-line" id="projectsLine">PROJETOS</span>
           </h2>
-          <p class="projects-description">
+          <p class="projects-description" id="projectsDescription">
             Aqui você encontra todos os projetos em que já trabalhei, sejam pessoais ou aqueles realizados com vínculo
             empregatício, nos quais atuei no time de desenvolvimento.
           </p>
@@ -153,9 +203,9 @@
                   <span class="project-device project-device-right"></span>
                 </div>
               </div>
-              <p class="project-company">Projeto Pessoal</p>
-              <h3 class="project-title">Deck Forge</h3>
-              <p class="project-summary">Clique para abrir a descrição do projeto na própria página.</p>
+              <p class="project-company" id="projectOneCompany">Projeto Pessoal</p>
+              <h3 class="project-title" id="projectOneTitle">Deck Forge</h3>
+              <p class="project-summary" id="projectOneSummary">Clique para abrir a descrição do projeto na própria página.</p>
               <div class="project-stack">
                 <span class="stack-pill">React</span>
                 <span class="stack-pill">Node.js</span>
@@ -175,9 +225,9 @@
                   />
                 </div>
               </div>
-              <p class="project-company">Cliente Santiago Locação</p>
-              <h3 class="project-title">Santiago Locação Page</h3>
-              <p class="project-summary">Landing page moderna para apresentação de serviços e logística.</p>
+              <p class="project-company" id="projectTwoCompany">Cliente Santiago Locação</p>
+              <h3 class="project-title" id="projectTwoTitle">Santiago Locação Page</h3>
+              <p class="project-summary" id="projectTwoSummary">Landing page moderna para apresentação de serviços e logística.</p>
               <div class="project-stack">
                 <span class="stack-pill">React</span>
                 <span class="stack-pill">CSS / Tailwind</span>
@@ -244,7 +294,7 @@
         </div>
       </section>
 
-      <section class="experience-section" id="experience">
+      <section class="experience-section" id="experience" data-section-name="Experiência">
         <div class="experience-stars" aria-hidden="true">
           <span class="experience-star experience-star-1"></span>
           <span class="experience-star experience-star-2"></span>
@@ -254,49 +304,226 @@
 
         <div class="experience-copy">
           <h2 class="experience-heading">
-            <span class="experience-kana">キャリア</span>
-            <span class="experience-line" id="experienceLine">EXPERIÊNCIA</span>
+            <span class="experience-kana" id="experienceKana">ヨケ</span>
+            <span class="experience-line" id="experienceLine">EXPERIÊNCIA PROFISSIONAL</span>
           </h2>
-          <p class="experience-description">
-            Aqui ficam os projetos profissionais, empresas e experiências onde atuei no desenvolvimento de produtos,
-            interfaces e automações. A estrutura segue o mesmo formato visual da seção de projetos.
+          <p class="experience-description" id="experienceDescription">
+            Conheça minha trajetória profissional, da atuação mais recente aos primeiros projetos.
           </p>
         </div>
 
-        <div class="experience-grid">
-          <article class="experience-card">
-            <div class="experience-visual experience-visual-cyan"></div>
-            <p class="experience-company">Empresa / Cliente</p>
-            <h3 class="experience-title">Cargo ou Projeto Profissional</h3>
-            <p class="experience-summary">Espaço reservado para um resumo curto da atuação, escopo e impacto.</p>
-            <div class="experience-stack">
-              <span class="stack-pill">React</span>
-              <span class="stack-pill">TypeScript</span>
-              <span class="stack-pill">UI</span>
+        <div class="experience-timeline">
+          <div class="experience-timeline-line" aria-hidden="true"></div>
+
+          <article class="experience-item experience-item-right">
+            <div class="experience-meta">
+              <p class="experience-period">Cargo Atual <span>•</span> Presente</p>
+              <p class="experience-duration">MSC Brasil</p>
+            </div>
+            <div class="experience-node" aria-hidden="true"></div>
+            <div class="experience-card">
+              <div class="experience-visual experience-visual-light">
+                <img
+                  class="experience-logo-image"
+                  src="./IMG/Logo_MSC_Cargo_rgb_bk.png"
+                  alt="Logo MSC"
+                />
+              </div>
+              <div class="experience-card-body">
+                <p class="experience-company" id="experienceOneCompany">MSC Brasil</p>
+                <h3 class="experience-title" id="experienceOneTitle">Assistente de Customer Service / Quality</h3>
+                <p class="experience-summary" id="experienceOneSummary">
+                  Atuo com análise de bookings, tratamento de divergências e suporte operacional. Desenvolvo e mantenho
+                  automações utilizando VBA, Power Apps e Power Automate, com foco na melhoria de processos, ganho de
+                  eficiência e otimização da comunicação com clientes e outras agências.
+                </p>
+                <div class="experience-stack">
+                  <span class="stack-pill">VBA</span>
+                  <span class="stack-pill">Power Apps</span>
+                  <span class="stack-pill">Power Automate</span>
+                </div>
+                <button class="experience-link" id="experienceLinkOne" type="button">Mostrar detalhes</button>
+              </div>
             </div>
           </article>
 
-          <article class="experience-card">
-            <div class="experience-visual experience-visual-amber"></div>
-            <p class="experience-company">Empresa / Cliente</p>
-            <h3 class="experience-title">Cargo ou Projeto Profissional</h3>
-            <p class="experience-summary">Espaço reservado para um resumo curto da atuação, escopo e impacto.</p>
-            <div class="experience-stack">
-              <span class="stack-pill">Node.js</span>
-              <span class="stack-pill">API</span>
-              <span class="stack-pill">MongoDB</span>
+          <article class="experience-item experience-item-left">
+            <div class="experience-card">
+              <div class="experience-visual experience-visual-gold">
+                <img
+                  class="experience-logo-image"
+                  src="./IMG/Logo_MSC_Cargo_rgb_bk.png"
+                  alt="Logo MSC"
+                />
+              </div>
+              <div class="experience-card-body">
+                <p class="experience-company" id="experienceTwoCompany">MSC Brasil</p>
+                <h3 class="experience-title" id="experienceTwoTitle">Estagiário</h3>
+                <p class="experience-summary" id="experienceTwoSummary">
+                  Atuei no desenvolvimento de melhorias no sistema de comunicação com clientes, criando soluções em VBA
+                  para disparo de e-mails em lote, aumentando a produtividade e reduzindo o tempo de resposta das
+                  operações.
+                </p>
+                <div class="experience-stack">
+                  <span class="stack-pill">VBA</span>
+                  <span class="stack-pill">E-mail em Lote</span>
+                  <span class="stack-pill">Automação</span>
+                </div>
+                <button class="experience-link" id="experienceLinkTwo" type="button">Mostrar detalhes</button>
+              </div>
+            </div>
+            <div class="experience-node" aria-hidden="true"></div>
+            <div class="experience-meta">
+              <p class="experience-period">Estágio <span>•</span> 3 meses</p>
+              <p class="experience-duration">MSC Brasil</p>
             </div>
           </article>
 
-          <article class="experience-card">
-            <div class="experience-visual experience-visual-neon"></div>
-            <p class="experience-company">Empresa / Cliente</p>
-            <h3 class="experience-title">Cargo ou Projeto Profissional</h3>
-            <p class="experience-summary">Espaço reservado para um resumo curto da atuação, escopo e impacto.</p>
-            <div class="experience-stack">
-              <span class="stack-pill">Python</span>
-              <span class="stack-pill">Power BI</span>
-              <span class="stack-pill">Automação</span>
+          <article class="experience-item experience-item-right">
+            <div class="experience-meta">
+              <p class="experience-period">Jun/2023 <span>•</span> Mai/2024</p>
+              <p class="experience-duration">Colégio COC</p>
+            </div>
+            <div class="experience-node" aria-hidden="true"></div>
+            <div class="experience-card">
+              <div class="experience-visual experience-visual-dark">
+                <span class="experience-logo-mark experience-logo-mark-alt">COC</span>
+              </div>
+              <div class="experience-card-body">
+                <p class="experience-company" id="experienceThreeCompany">Colégio COC</p>
+                <h3 class="experience-title" id="experienceThreeTitle">Estagiário</h3>
+                <p class="experience-summary" id="experienceThreeSummary">
+                  Atuei no suporte às rotinas administrativas e tecnológicas, com foco em WordPress para manutenção e
+                  atualização de conteúdos. Também auxiliava na organização de dados, atendimento interno e apoio em
+                  processos operacionais.
+                </p>
+                <div class="experience-stack">
+                  <span class="stack-pill">WordPress</span>
+                  <span class="stack-pill">Suporte</span>
+                  <span class="stack-pill">Conteúdo</span>
+                </div>
+                <button class="experience-link" id="experienceLinkThree" type="button">Mostrar detalhes</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="education-section" id="education" data-section-name="Formação">
+        <div class="education-stars" aria-hidden="true">
+          <span class="education-star education-star-1"></span>
+          <span class="education-star education-star-2"></span>
+          <span class="education-star education-star-3"></span>
+          <span class="education-star education-star-4"></span>
+        </div>
+
+        <div class="education-copy">
+          <h2 class="education-heading">
+            <span class="education-kana" id="educationKana">ガクレキ</span>
+            <span class="education-line" id="educationLine">FORMAÇÃO ACADÊMICA</span>
+          </h2>
+          <p class="education-description" id="educationDescription">
+            Minha base acadêmica combina desenvolvimento de sistemas, infraestrutura de TI e aplicação prática em
+            soluções voltadas ao ambiente corporativo.
+          </p>
+        </div>
+
+        <div class="education-panel">
+          <article class="education-card">
+            <div class="education-badge" id="educationBadgeOne">Graduação em andamento</div>
+            <p class="education-place" id="educationPlaceOne">Universidade Santa Cecília</p>
+            <h3 class="education-title" id="educationTitleOne">Sistemas de Informação</h3>
+            <p class="education-summary" id="educationSummaryOne">
+              Graduação em andamento, com foco no desenvolvimento de sistemas, análise de dados e automação de
+              processos. Durante a formação, venho adquirindo conhecimentos em lógica de programação, desenvolvimento
+              web, banco de dados e integração de sistemas, além de aplicar esses conceitos em projetos práticos e
+              soluções voltadas ao ambiente corporativo.
+            </p>
+            <div class="education-stack">
+              <span class="stack-pill">Desenvolvimento Web</span>
+              <span class="stack-pill">Banco de Dados</span>
+              <span class="stack-pill">Integração de Sistemas</span>
+            </div>
+          </article>
+
+          <article class="education-card">
+            <div class="education-badge education-badge-alt" id="educationBadgeTwo">Formação Técnica</div>
+            <p class="education-place" id="educationPlaceTwo">SENAI Santos</p>
+            <h3 class="education-title" id="educationTitleTwo">Técnico em Redes de Computadores</h3>
+            <p class="education-summary" id="educationSummaryTwo">
+              Formação técnica voltada para infraestrutura de redes e suporte em tecnologia da informação.
+              Desenvolvimento de habilidades em configuração de redes, protocolos de comunicação, manutenção de
+              sistemas, segurança básica e suporte técnico, proporcionando uma base sólida para atuação na área de TI.
+            </p>
+            <div class="education-stack">
+              <span class="stack-pill">Infraestrutura</span>
+              <span class="stack-pill">Protocolos</span>
+              <span class="stack-pill">Suporte Técnico</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="technologies-section" id="technologies" data-section-name="Tecnologias">
+        <div class="technologies-stars" aria-hidden="true">
+          <span class="technologies-star technologies-star-1"></span>
+          <span class="technologies-star technologies-star-2"></span>
+          <span class="technologies-star technologies-star-3"></span>
+          <span class="technologies-star technologies-star-4"></span>
+        </div>
+
+        <div class="technologies-copy">
+          <h2 class="technologies-heading">
+            <span class="technologies-kana" id="technologiesKana">ギジュツ</span>
+            <span class="technologies-line" id="technologiesLine">TECNOLOGIAS</span>
+          </h2>
+          <p class="technologies-description" id="technologiesDescription">
+            Tecnologias que utilizo no desenvolvimento de interfaces, automações, backend e infraestrutura.
+          </p>
+        </div>
+
+        <div class="technologies-panel">
+          <article class="technologies-card">
+            <div class="technologies-card-header">
+              <span class="technologies-emoji">💻</span>
+              <h3 class="technologies-card-title" id="technologiesFrontendTitle">Frontend</h3>
+            </div>
+            <div class="technologies-list">
+              <span class="technology-chip"><i class="devicon-react-original"></i><span>React</span></span>
+              <span class="technology-chip"><i class="devicon-vuejs-plain"></i><span>Vue.js</span></span>
+              <span class="technology-chip"><i class="devicon-html5-plain"></i><span>HTML5</span></span>
+              <span class="technology-chip"><i class="devicon-css3-plain"></i><span>CSS3</span></span>
+              <span class="technology-chip"><i class="devicon-javascript-plain"></i><span>JavaScript</span></span>
+              <span class="technology-chip"><i class="devicon-typescript-plain"></i><span>TypeScript</span></span>
+              <span class="technology-chip"><i class="devicon-sass-original"></i><span>Sass</span></span>
+            </div>
+          </article>
+
+          <article class="technologies-card">
+            <div class="technologies-card-header">
+              <span class="technologies-emoji">🗄️</span>
+              <h3 class="technologies-card-title" id="technologiesBackendTitle">Backend & Banco de Dados</h3>
+            </div>
+            <div class="technologies-list">
+              <span class="technology-chip"><i class="devicon-rails-plain"></i><span>Ruby on Rails</span></span>
+              <span class="technology-chip"><i class="devicon-mysql-original"></i><span>MySQL</span></span>
+              <span class="technology-chip"><i class="devicon-redis-plain"></i><span>Redis</span></span>
+              <span class="technology-chip"><i class="devicon-nodejs-plain"></i><span>Node.js</span></span>
+            </div>
+          </article>
+
+          <article class="technologies-card">
+            <div class="technologies-card-header">
+              <span class="technologies-emoji">⚙️</span>
+              <h3 class="technologies-card-title" id="technologiesDevopsTitle">DevOps & Desenvolvimento</h3>
+            </div>
+            <div class="technologies-list">
+              <span class="technology-chip"><i class="devicon-docker-plain"></i><span>Docker</span></span>
+              <span class="technology-chip"><i class="devicon-amazonwebservices-plain-wordmark"></i><span>AWS</span></span>
+              <span class="technology-chip"><i class="devicon-git-plain"></i><span>Git</span></span>
+              <span class="technology-chip"><i class="devicon-github-original"></i><span>GitHub</span></span>
+              <span class="technology-chip"><i class="devicon-gitlab-plain"></i><span>GitLab</span></span>
+              <span class="technology-chip"><i class="devicon-firebase-plain"></i><span>Firebase</span></span>
             </div>
           </article>
         </div>
